@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: strapi
+    name: strapi-demo-api
     env: node
     plan: starter
     buildCommand: yarn install && yarn build
@@ -19,13 +19,32 @@ services:
         sync: false
       - key: DATABASE_URL
         fromDatabase:
-          name: strapi
+          name: strapi-demo-db
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: ADMIN_JWT_SECRET
         generateValue: true
+    autoDeploy: false
+  - type: web
+    name: strapi-demo-web
+    env: static
+    buildCommand: cd web && yarn && yarn build
+    staticPublishPath: ./web/public
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: true
+      - key: STRAPI_API_HOST
+        fromService:
+          name: strapi-demo-api
+          type: web
+          property: host
+    routes:
+    - type: rewrite
+      source: /api/*
+      destination: https://strapi-demo-api.onrender.com/*
+    autoDeploy: false
 
 databases:
-  - name: strapi
+  - name: strapi-demo-db
     plan: starter
