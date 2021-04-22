@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "votes",
+  "info": {
+    "name": "Vote"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "option": {
+      "type": "enumeration",
+      "enum": [
+        "cats",
+        "dogs"
+      ],
+      "required": true
+    }
+  }
+}

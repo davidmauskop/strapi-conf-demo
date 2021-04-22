@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "page_infos",
+  "info": {
+    "name": "page-info",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    }
+  }
+}
